@@ -11,7 +11,12 @@
   line-height: 40px;
   margin: 0;
   position: absolute;
+  top: 20px;
   left: 16px;
+  font-family: "Cabinet Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  color: #fff;
 }
 
 .weather-card__image {

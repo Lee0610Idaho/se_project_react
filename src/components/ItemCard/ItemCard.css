@@ -1,16 +1,36 @@
 .card {
-  width: 323 px;
+  width: 325px;
+  height: 328px;
   position: relative;
+  justify-content: center;
   display: flex;
   justify-content: center;
+  border-radius: 20px;
+  border: 1px solid #00000030;
+}
+
+.card__name-container {
+  display: flex;
+  position: absolute;
+  top: 10px;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .card__name {
-  position: absolute;
-  top: 15px;
+  background-color: #fff;
   margin: 0;
+  font-size: 16px;
+  line-height: 20px;
+  border-radius: 4px;
+  font-family: "Cabinet Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  color: #00000099;
+  padding: 2px 12px;
 }
 
 .card__image {
-  width: 100%;
+  width: 323px;
+  border-radius: 20px;
+  height: auto;
 }
