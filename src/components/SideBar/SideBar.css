@@ -1,0 +1,6 @@
+.sidebar {
+  display: flex;
+  align-items: center;
+  padding-right: 150px;
+  gap: 20px;
+}

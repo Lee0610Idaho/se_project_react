@@ -31,7 +31,6 @@ export default function AddItemModal({
     setWeather("");
   };
 
-  console.log(name);
   return (
     <ModalWithForm
       title="New garment"
