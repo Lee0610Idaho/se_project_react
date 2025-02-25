@@ -1,16 +1,25 @@
 import "./WeatherCard.css";
-import sunny from "../../assets/sunny.png";
+import sunny from "../../assets/day/fog.svg";
+import { weatherOptions } from "../../utils/constants";
 import { useContext } from "react";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
-function WeatherCard({ weatherData }) {
-  const { currentTemperatureUnit} = useContext(CurrentTemperatureUnitContext);
+const WeatherCard = ({ day, type, weatherTemp = "" }) => {
+  const imageSource = weatherOptions.filter((i) => {
+    return i.day === day && i.type === type;
+  });
+
+  const imageSourceUrl = imageSource[0].url;
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+
   return (
-    <section className="weather-card">
-      <p className="weather-card__temp">{currentTemperatureUnit=== "F" ? weatherData.temp.F : weatherData.temp.C}&deg;{currentTemperatureUnit}</p>
-      <img src={sunny} alt="Sunny Image" className="weather-card__image" />
+    <section className="weather" id="weather">
+      <div className="weather_info">
+        {weatherTemp} °{currentTemperatureUnit}
+      </div>
+      <img src={imageSourceUrl} className="weather_image" alt="weather" />
     </section>
   );
-}
+};
 
 export default WeatherCard;

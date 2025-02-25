@@ -35,17 +35,20 @@ function App() {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
 
-  const handleCardClick = (card) => {
+  const handleSelectedCard = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
   };
 
   const handleAddClick = () => {
+    console.log("click add");
     setActiveModal("add-garment");
   };
 
   const handleCreateModal = () => {
+    console.log("create modal");
     setActiveModal("create");
+    // setActiveModal("add-garment");
   };
 
   const closeActiveModal = () => {
@@ -91,8 +94,8 @@ function App() {
     getWeather(coordinates, APIkey)
       .then((data) => {
         const filteredData = filterWeatherData(data);
-        setWeatherData(filteredData);
-        // setCurrentCity(data.name);
+        setTemp(filteredData);
+        setCurrentCity(data.name);
       })
       .catch(console.error);
   }, []);
@@ -112,25 +115,27 @@ function App() {
     >
       <div className="page">
         <div className="page__content">
-          <Header
-            handleAddClick={handleAddClick}
-            city={currentCity}
-            weatherData={weatherData}
-          />
+          <Header onCreateModal={handleCreateModal} city={currentCity} />
           <Routes>
             <Route
               path="/"
               element={
                 <Main
-                  weatherData={weatherData}
-                  onCardClick={handleCardClick}
+                  weatherTemp={temp}
+                  onSelectedCard={handleSelectedCard}
                   clothingItems={clothingItems}
                 />
               }
             />
             <Route
               path="/profile"
-              element={<Profile onCardClick={handleCardClick} />}
+              element={
+                <Profile
+                  onSelectedCard={handleSelectedCard}
+                  onCreateModal={handleCreateModal}
+                  clothingItems={clothingItems}
+                />
+              }
             />
           </Routes>
 
@@ -138,14 +143,16 @@ function App() {
         </div>
         <AddItemModal
           onClose={closeActiveModal}
-          isOpen={activeModal === "add-garment"}
-          onAddItemModalSubmit={handleAddItemModalSubmit}
+          isOpen={activeModal === "create"}
+          onAddItemModalSubmit={handleAddItemSubmit}
         />
+
         <ItemModal
           activeModal={activeModal}
           card={selectedCard}
           onClose={closeActiveModal}
-          // isOpen={activeModal === "preview"}
+          isOpen={activeModal === "preview"}
+          deleteItem={handleDeleteItem}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>

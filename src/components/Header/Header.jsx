@@ -3,12 +3,24 @@ import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-function Header({ handleAddClick, weatherData }) {
-  const currentDate = new Date().toLocaleString("default", {
-    month: "long",
-    day: "numeric",
-  });
+function Header({ onCreateModal, city }) {
+  const [currentDate, setCurrentDate] = useState("");
+
+  useEffect(() => {
+    const getCurrentDate = () => {
+      const date = new Date();
+      const options = {
+        month: "long",
+        day: "numeric",
+      };
+
+      return date.toLocaleDateString(undefined, options);
+    };
+
+    setCurrentDate(getCurrentDate());
+  }, []);
 
   return (
     <header className="header">
@@ -17,11 +29,12 @@ function Header({ handleAddClick, weatherData }) {
       </Link>
 
       <p className="header__date-and-location">
-        {currentDate}, {weatherData.city}
+        {currentDate}, {city}
       </p>
+
       <ToggleSwitch />
       <button
-        onClick={handleAddClick}
+        onClick={onCreateModal}
         type="button"
         className="header__add-clothes-btn"
       >

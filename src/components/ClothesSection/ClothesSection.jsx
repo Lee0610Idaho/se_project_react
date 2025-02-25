@@ -3,18 +3,28 @@ import SideBar from "../SideBar/SideBar";
 import { defaultClothingItems } from "../../utils/constants";
 import ItemCard from "../ItemCard/ItemCard";
 
-function ClothesSection({ onCardClick }) {
+function ClothesSection({ onSelectedCard, onCreateModal, clothingItems }) {
   return (
     <div className="clothes-section">
       <div>
         <p>Your items</p>
-        <button>+ Add New</button>
+        <button
+          className="clothes-section__card-button"
+          type="text"
+          onClick={onCreateModal}
+        >
+          + Add New
+        </button>
       </div>
 
       <ul className="clothes-section__list">
-        {defaultClothingItems.map((item) => {
+        {clothingItems.map((item) => {
           return (
-            <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+            <ItemCard
+              key={item._id}
+              item={item}
+              onSelectedCard={onSelectedCard}
+            />
           );
         })}
       </ul>
