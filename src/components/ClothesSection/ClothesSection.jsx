@@ -6,8 +6,8 @@ import ItemCard from "../ItemCard/ItemCard";
 function ClothesSection({ onSelectedCard, onCreateModal, clothingItems }) {
   return (
     <div className="clothes-section">
-      <div>
-        <p>Your items</p>
+      <div className="clothes-section__text">
+        <p className="clothes-section__header">Your items</p>
         <button
           className="clothes-section__card-button"
           type="text"

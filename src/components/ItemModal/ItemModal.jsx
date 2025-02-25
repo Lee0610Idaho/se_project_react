@@ -2,7 +2,7 @@ import "./ItemModal.css";
 
 function ItemModal({ activeModal, onClose, card, deleteItem }) {
   const handleDeleteItem = () => {
-    deleteItem(activeModal._id);
+    deleteItem(card._id);
   };
 
   return (

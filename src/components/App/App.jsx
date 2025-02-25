@@ -51,7 +51,7 @@ function App() {
     // setActiveModal("add-garment");
   };
 
-  const closeActiveModal = () => {
+  const handleCloseModal = () => {
     setActiveModal("");
   };
 
@@ -64,9 +64,11 @@ function App() {
   // };
 
   const handleAddItemSubmit = (item) => {
+    // console.log(item);
     addItems(item)
       .then((newItem) => {
         setClothingItems([newItem, ...clothingItems]);
+        console.log("closing modal");
         handleCloseModal();
       })
       .catch((error) => {
@@ -78,6 +80,7 @@ function App() {
   };
 
   const handleDeleteItem = (_id) => {
+    console.log(_id);
     deleteItems(_id)
       .then(() => {
         setClothingItems((clothingItems) =>
@@ -142,7 +145,7 @@ function App() {
           <Footer />
         </div>
         <AddItemModal
-          onClose={closeActiveModal}
+          onClose={handleCloseModal}
           isOpen={activeModal === "create"}
           onAddItemModalSubmit={handleAddItemSubmit}
         />
@@ -150,7 +153,7 @@ function App() {
         <ItemModal
           activeModal={activeModal}
           card={selectedCard}
-          onClose={closeActiveModal}
+          onClose={handleCloseModal}
           isOpen={activeModal === "preview"}
           deleteItem={handleDeleteItem}
         />

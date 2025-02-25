@@ -13,6 +13,7 @@ function request(url, options) {
 
 // Add item
 export function addItems(item) {
+  console.log(item);
   return request(`${baseUrl}/items`, {
     method: "POST",
     headers: {
