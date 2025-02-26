@@ -32,8 +32,10 @@
   display: flex;
   flex-wrap: wrap;
   max-width: 1015px;
-  gap: 20px;
-  padding: 20px 20px;
+  gap: 18px;
+  margin: 0;
+  padding-top: 16px;
+  padding-left: 0;
   font-family: "Cabinet Grotesk";
   font-style: normal;
   font-weight: 700;

@@ -1,6 +1,5 @@
 import "./ClothesSection.css";
 import SideBar from "../SideBar/SideBar";
-import { defaultClothingItems } from "../../utils/constants";
 import ItemCard from "../ItemCard/ItemCard";
 
 function ClothesSection({ onSelectedCard, onCreateModal, clothingItems }) {

@@ -28,7 +28,6 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [temp, setTemp] = useState(0);
-  // const [isLoading, setIsLoading] = useState(false);
   const [currentCity, setCurrentCity] = useState("");
 
   const handleToggleSwitchChange = () => {
@@ -41,34 +40,22 @@ function App() {
   };
 
   const handleAddClick = () => {
-    console.log("click add");
     setActiveModal("add-garment");
   };
 
   const handleCreateModal = () => {
-    console.log("create modal");
     setActiveModal("create");
-    // setActiveModal("add-garment");
   };
 
   const handleCloseModal = () => {
     setActiveModal("");
   };
 
-  // const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
-  //   setClothingItems((prevItems) => [
-  //     { name, link: imageUrl, weather },
-  //     ...prevItems,
-  //   ]);
-  //   closeActiveModal();
-  // };
-
   const handleAddItemSubmit = (item) => {
-    // console.log(item);
     addItems(item)
       .then((newItem) => {
         setClothingItems([newItem, ...clothingItems]);
-        console.log("closing modal");
+
         handleCloseModal();
       })
       .catch((error) => {
@@ -80,7 +67,6 @@ function App() {
   };
 
   const handleDeleteItem = (_id) => {
-    console.log(_id);
     deleteItems(_id)
       .then(() => {
         setClothingItems((clothingItems) =>
@@ -107,7 +93,6 @@ function App() {
     getItems()
       .then((data) => {
         setClothingItems(data);
-        console.log(data);
       })
       .catch(console.error);
   }, []);

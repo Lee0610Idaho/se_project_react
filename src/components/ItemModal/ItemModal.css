@@ -16,11 +16,30 @@
   padding: 20px 0 32px 32px;
 }
 
+.modal__footer_row_initial-row {
+  display: flex;
+}
 .modal__caption {
   margin: 0;
   font-size: 20px;
+  text-overflow: auto;
 }
 .modal__weather {
   margin-top: 12px;
+  margin: 0;
   font-size: 20px;
+}
+
+.modal__delete-button {
+  background-color: transparent;
+  font-family: "Cabinet Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: #ff4d00;
+  cursor: pointer;
+  margin-right: 32px;
+  margin-left: auto;
+  border: none;
 }
