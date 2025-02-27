@@ -8,8 +8,10 @@
 }
 
 .modal__image {
-  width: 498px;
-  height: auto;
+  height: 100%;
+  width: 100%;
+  max-width: 498px;
+  max-height: 498px;
 }
 
 .modal__footer {

@@ -101,6 +101,126 @@
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f",
       "weather": "cold",
       "_id": 17
+    },
+    {
+      "name": "Wall",
+      "imageUrl": "https://cdn.britannica.com/89/179589-138-3EE27C94/Overview-Great-Wall-of-China.jpg?w=800&h=450&c=crop",
+      "weather": "cold",
+      "_id": 18
+    },
+    {
+      "name": "jlj;lk;j",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f",
+      "weather": "hot",
+      "_id": 19
+    },
+    {
+      "name": "jlj;lk;j",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f",
+      "weather": "hot",
+      "_id": 20
+    },
+    {
+      "name": "jlj;lk;j",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f",
+      "weather": "cold",
+      "_id": 21
+    },
+    {
+      "name": "jlj;lk;j",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f",
+      "weather": "cold",
+      "_id": 22
+    },
+    {
+      "name": "asdf",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png?etag=f4bb188deaa25ac84ce2338be2d404ad",
+      "weather": "cold",
+      "_id": 23
+    },
+    {
+      "name": "asjkdf",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f",
+      "weather": "cold",
+      "_id": 24
+    },
+    {
+      "name": "jldjf;al",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png?etag=f4bb188deaa25ac84ce2338be2d404ad",
+      "weather": "cold",
+      "_id": 25
+    },
+    {
+      "name": "jldjf;al",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png?etag=f4bb188deaa25ac84ce2338be2d404ad",
+      "weather": "cold",
+      "_id": 26
+    },
+    {
+      "name": "sjdfkl",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png?etag=f4bb188deaa25ac84ce2338be2d404ad",
+      "weather": "cold",
+      "_id": 27
+    },
+    {
+      "name": "asdjfkjk",
+      "imageUrl": "https://cdn.britannica.com/89/179589-138-3EE27C94/Overview-Great-Wall-of-China.jpg?w=800&h=450&c=crop",
+      "weather": "cold",
+      "_id": 28
+    },
+    {
+      "name": "sdf",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png?etag=f4bb188deaa25ac84ce2338be2d404ad",
+      "weather": "cold",
+      "_id": 29
+    },
+    {
+      "name": "sdf",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png?etag=f4bb188deaa25ac84ce2338be2d404ad",
+      "weather": "cold",
+      "_id": 30
+    },
+    {
+      "name": "adsf",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png?etag=f4bb188deaa25ac84ce2338be2d404ad",
+      "weather": "cold",
+      "_id": 31
+    },
+    {
+      "name": "sdjfkl;",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f",
+      "weather": "cold",
+      "_id": 32
+    },
+    {
+      "name": "ajdsfkl",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f",
+      "weather": "cold",
+      "_id": 33
+    },
+    {
+      "name": "fasdf",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f",
+      "weather": "cold",
+      "_id": 34
+    },
+    {
+      "name": "asdfjkl",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png?etag=f4bb188deaa25ac84ce2338be2d404ad",
+      "weather": "cold",
+      "_id": 35
+    },
+    {
+      "name": "fsadfas",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png?etag=3efeec41c1c78b8afe26859ca7fa7b6f",
+      "weather": "cold",
+      "_id": 36
+    },
+    {
+      "name": "jfklasdf",
+      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png?etag=f4bb188deaa25ac84ce2338be2d404ad",
+      "weather": "cold",
+      "_id": 37
     }
   ]
 }
