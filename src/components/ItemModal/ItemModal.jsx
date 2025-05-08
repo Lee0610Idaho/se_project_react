@@ -1,9 +1,16 @@
 import "./ItemModal.css";
 
-function ItemModal({ activeModal, onClose, card, deleteItem }) {
+function ItemModal({ activeModal, onClose, card, deleteItem, currentUser }) {
   const handleDeleteItem = () => {
     deleteItem(card._id);
   };
+
+  const isOwnedByUser = selectedCard.owner === currentUser._id;
+  const itemDeleteClassName = `modal__delete-button ${
+    isOwnedByUser
+      ? "modal__delete-button_visible"
+      : "modal__delete-button_hidden"
+  }`;
 
   return (
     <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>

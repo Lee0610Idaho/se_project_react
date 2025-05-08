@@ -1,4 +1,5 @@
 import "./SideBar.css";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import avatar from "../../assets/avatar.png";
 
 function SideBar() {

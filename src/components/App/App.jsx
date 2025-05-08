@@ -184,6 +184,7 @@ function App() {
             onClose={handleCloseModal}
             isOpen={activeModal === "preview"}
             deleteItem={handleDeleteItem}
+            currentUser={currentUser}
           />
         </div>
       </CurrentTemperatureUnitContext.Provider>
