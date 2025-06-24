@@ -7,6 +7,8 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import ItemModal from "../ItemModal/ItemModal";
 import Profile from "../Profile/Profile";
 import Footer from "../Footer/Footer";
@@ -51,6 +53,12 @@ function App() {
   };
 
   // const history = useHistory();
+  const [currentUser, setCurrentUser] = useState({
+    email: "",
+    name: "",
+    avatar: "",
+    _id: "",
+  });
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -146,6 +154,8 @@ function App() {
               openRegisterModal={() => handleOpenModal("register", "/signup")}
               openLoginModal={() => handleOpenModal("login", "/signin")}
               city={currentCity}
+              isLoggedIn={isLoggedIn}
+              currentUser={currentUser}
             />
             <Routes>
               <Route
@@ -155,10 +165,64 @@ function App() {
                     weatherTemp={temp}
                     onSelectedCard={handleSelectedCard}
                     clothingItems={clothingItems}
+                    // onCardLike={handleCardLike}
                   />
                 }
               />
               <Route
+                path="/signin"
+                element={
+                  <>
+                    <Main
+                      weatherTemp={temp}
+                      onSelectedCard={handleSelectedCard}
+                      clothingItems={clothingItems}
+                    />
+                    <LoginModal>
+                      {" "}
+                      handleCloseModal={() => handleCloseModal("/")}
+                      handleLogin={handleLogin}
+                    </LoginModal>
+                  </>
+                }
+              />
+              <Route
+                path="/signup"
+                element={
+                  <>
+                    <Main
+                      weatherTemp={temp}
+                      onSelectedCard={handleSelectedCard}
+                      clothingItems={clothingItems}
+                    />
+                    <RegisterModal>
+                      handleRegistration={handleRegistration}
+                      handleCloseModal={() => handleCloseModal("/")}
+                    </RegisterModal>
+                  </>
+                }
+              />
+
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <Profile
+                      onSelectedCard={handleSelectedCard}
+                      onCreateModal={() => handleOpenModal("create")}
+                      clothingItems={clothingItems}
+                      // currentUser={currentUser}
+                      // onCardLike={handleCardLike}
+                      // handleLogOut={handleLogOut}
+                      openEditModal={() =>
+                        handleOpenModal("update", "/profile/edit")
+                      }
+                    />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* <Route
                 path="/profile"
                 element={
                   <Profile
@@ -167,7 +231,16 @@ function App() {
                     clothingItems={clothingItems}
                   />
                 }
-              />
+              /> */}
+
+              {/* <Route path="/" exact={true}>
+                <Main
+                  weatherTemp={temp}
+                  onSelectedCard={handleSelectedCard}
+                  clothingItems={clothingItems}
+                  // onCardLike={handleCardLike}
+                />
+              </Route> */}
             </Routes>
 
             <Footer />

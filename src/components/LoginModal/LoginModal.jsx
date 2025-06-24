@@ -62,3 +62,5 @@ const LoginModal = ({ handleCloseModal, isOpen = true, handleLogin }) => {
     </ModalWithForm>
   );
 };
+
+export default LoginModal;
