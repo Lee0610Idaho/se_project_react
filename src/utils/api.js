@@ -12,11 +12,12 @@ export function request(url, options) {
 }
 
 // Add item
-export function addItems(item) {
+export function addItems(item, token) {
   return request(`${BASE_URL}/items`, {
     method: "POST",
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(item),
   });
@@ -37,29 +38,26 @@ export function deleteItems(_id) {
   return request(`${BASE_URL}/items/${_id}`, {
     method: "DELETE",
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
   });
 }
 
-// Like item
-export function addCardLike(id, token, isLiked, setIsLiked) {
-  return request(`${BASE_URL}/items/${id}/likes`, {
+export function addCardLike(id, token) {
+  return request(`${baseUrl}/items/${id}/likes`, {
     method: "PUT",
     headers: {
-      "content-type": "application/json",
       authorization: `Bearer ${token}`,
     },
-  }).then(() => setIsLiked(!isLiked));
+  });
 }
 
-// Dislike item
-export function removeCardLike(id, token, isLiked, setIsLiked) {
-  return request(`${BASE_URL}/items/${id}/likes`, {
+export function removeCardLike(id, token) {
+  return request(`${baseUrl}/items/${id}/likes`, {
     method: "DELETE",
     headers: {
-      "content-type": "application/json",
       authorization: `Bearer ${token}`,
     },
-  }).then(() => setIsLiked(!isLiked));
+  });
 }
