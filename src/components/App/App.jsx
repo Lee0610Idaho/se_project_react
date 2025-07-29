@@ -105,8 +105,7 @@ function App() {
     addItems(item)
       .then((newItem) => {
         setClothingItems([newItem, ...clothingItems]);
-      })
-      .then(() => {
+
         handleCloseModal();
       })
       .catch((error) => {
