@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { CurrentUserContext } from "../../context/CurrentUserContext";
+// import { CurrentUserContext } from "../../context/CurrentUserContext";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 
@@ -10,7 +10,7 @@ function EditProfileModal({
   handleEditProfile,
   buttonText,
 }) {
-  const currentUser = useContext(CurrentUserContext);
+  // const currentUser = useContext(CurrentUserContext);
 
   const { values, setValues, resetForm, handleChange, errors } =
     useFormWithValidation();
