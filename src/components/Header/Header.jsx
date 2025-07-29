@@ -4,9 +4,21 @@ import avatar from "../../assets/avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import React from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Header({ onCreateModal, city }) {
+function Header({ onCreateModal, city, openRegisterModal, openLoginModal }) {
+  const currentUser = React.useContext(CurrentUserContext);
+  const isLoggedIn = currentUser && currentUser.name;
+
   const [currentDate, setCurrentDate] = useState("");
+
+  const getInitial = (name) => {
+    if (name) {
+      return name[0].toUpperCase();
+    }
+    return "?";
+  };
 
   useEffect(() => {
     const getCurrentDate = () => {
@@ -33,26 +45,49 @@ function Header({ onCreateModal, city }) {
       </p>
 
       <ToggleSwitch />
-      <button
-        onClick={onCreateModal}
-        type="button"
-        className="header__add-clothes-btn"
-      >
-        + Add clothes
-      </button>
-
-      <Link to="/profile" className="header__link">
+      {isLoggedIn ? (
         <div className="header__user-container">
-          <p className="header__username">Terrence Tegegne</p>
-          <img
-            src={avatar}
-            alt="Terrence Tegenene"
-            className="header__avatar"
-          />
+          <button
+            onClick={onCreateModal}
+            type="button"
+            className="header__add-clothes-btn"
+          >
+            + Add clothes
+          </button>
+          <Link to="/profile" className="header__link">
+            <p className="header__username">{currentUser.name}</p>
+            {currentUser.avatar ? (
+              <img
+                src={currentUser.avatar}
+                alt="Profile avatar"
+                className="header__avatar"
+              />
+            ) : (
+              <div className="header__placeholder">
+                {getInitial(currentUser.name)}
+              </div>
+            )}
+          </Link>
         </div>
-      </Link>
+      ) : (
+        <div className="header__guest-nav">
+          <button
+            onClick={openRegisterModal}
+            type="button"
+            className="header__signup"
+          >
+            Sign Up
+          </button>
+          <button
+            type="button"
+            className="header__signin"
+            onClick={openLoginModal}
+          >
+            Log In
+          </button>
+        </div>
+      )}
     </header>
   );
 }
-
 export default Header;

@@ -30,10 +30,6 @@ function Main({ weatherTemp, onSelectedCard, clothingItems }) {
     }
   }, [temp, currentTemperatureUnit]);
 
-  const filteredCards = clothingItems.filter((clothingItem) => {
-    return clothingItem.weather.toLowerCase() === weatherType;
-  });
-
   // Future Work: Have the weather card read current time for day = {false} vs {true}
   return (
     <main>

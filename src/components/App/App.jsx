@@ -15,6 +15,9 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import { defaultClothingItems } from "../../utils/constants";
 import { Route, Routes } from "react-router-dom";
 import { addItems, getItems, deleteItems } from "../../utils/api";
+import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
+import * as auth from "../../utils/auth.js";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -23,12 +26,13 @@ function App() {
     city: "",
   });
 
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [temp, setTemp] = useState(0);
   const [currentCity, setCurrentCity] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -51,10 +55,21 @@ function App() {
     setActiveModal("");
   };
 
+  const openRegisterModal = (e) => {
+    e.preventDefault();
+    setActiveModal("register");
+  };
+
+  const openLoginModal = (e) => {
+    e.preventDefault();
+    setActiveModal("login");
+  };
+
   const handleAddItemSubmit = (item) => {
+    console.log(item);
     addItems(item)
       .then((newItem) => {
-        setClothingItems([newItem, ...clothingItems]);
+        setClothingItems((prevItems) => [newItem, ...prevItems]);
       })
       .then(() => {
         handleCloseModal();
@@ -78,6 +93,41 @@ function App() {
       .catch((error) =>
         console.error(`Unable to delete item due to: ${error.status}`)
       );
+  };
+
+  const handleRegistration = (name, avatar, email, password) => {
+    console.log("Registering");
+    // register(name, avatar, email, password)
+    //   .then(() => {
+    //     handleLogin(email, password);
+    //     handleCloseModal();
+    //   })
+    //   .catch(console.error);
+  };
+
+  const handleLogin = (email, password) => {
+    console.log("Logging in");
+    // if (!email || !password) {
+    //   return;
+    // }
+
+    // login(email, password)
+    //   .then((data) => {
+    //     if (data.token && data.user) {
+    //       setToken(data.token);
+    //       setIsLoggedIn(true);
+    //       console.log(data.user);
+    //       setUserData(data.user);
+    //       setIsLoggedInLoading(false);
+    //     } else {
+    //       console.error("No JWT token found.");
+    //     }
+    //     handleCloseModal();
+    //   })
+    //   .catch((err) => {
+    //     console.err("Error logging user in:", err);
+    //   })
+    //   .finally(setIsLoggedInLoading(false));
   };
 
   useEffect(() => {
@@ -104,7 +154,12 @@ function App() {
     >
       <div className="page">
         <div className="page__content">
-          <Header onCreateModal={handleCreateModal} city={currentCity} />
+          <Header
+            onCreateModal={handleCreateModal}
+            city={currentCity}
+            openRegisterModal={openRegisterModal}
+            openLoginModal={openLoginModal}
+          />
           <Routes>
             <Route
               path="/"
@@ -142,6 +197,23 @@ function App() {
           onClose={handleCloseModal}
           isOpen={activeModal === "preview"}
           deleteItem={handleDeleteItem}
+        />
+
+        <RegisterModal
+          activeModal={activeModal}
+          onClose={handleCloseModal}
+          isOpen={activeModal === "register"}
+          handleRegistration={handleRegistration}
+          buttonText={isLoading ? "Saving..." : "Sign Up"}
+          openSignInModal={openLoginModal}
+        />
+        <LoginModal
+          activeModal={activeModal}
+          onClose={handleCloseModal}
+          isOpen={activeModal === "login"}
+          handleLogin={handleLogin}
+          buttonText={isLoading ? "Saving..." : "Log In"}
+          openRegisterModal={openRegisterModal}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>

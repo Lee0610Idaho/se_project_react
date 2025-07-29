@@ -1,4 +1,4 @@
-import { BASE_URL } from "../utils/constants";
+const baseUrl = "http://localhost:3001";
 
 export function processResponse(res) {
   if (res.ok) {
@@ -7,17 +7,17 @@ export function processResponse(res) {
   return Promise.reject(`Error ${res.status}`);
 }
 
-export function request(url, options) {
+function request(url, options) {
   return fetch(url, options).then(processResponse);
 }
 
 // Add item
-export function addItems(item, token) {
-  return request(`${BASE_URL}/items`, {
+export function addItems(item) {
+  console.log(item);
+  return request(`${baseUrl}/items`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      "content-type": "application/json",
     },
     body: JSON.stringify(item),
   });
@@ -25,7 +25,7 @@ export function addItems(item, token) {
 
 // Get item
 export function getItems() {
-  return request(`${BASE_URL}/items`, {
+  return request(`${baseUrl}/items`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
@@ -35,29 +35,10 @@ export function getItems() {
 
 // Delete item
 export function deleteItems(_id) {
-  return request(`${BASE_URL}/items/${_id}`, {
+  return request(`${baseUrl}/items/${_id}`, {
     method: "DELETE",
     headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
-    },
-  });
-}
-
-export function addCardLike(id, token) {
-  return request(`${baseUrl}/items/${id}/likes`, {
-    method: "PUT",
-    headers: {
-      authorization: `Bearer ${token}`,
-    },
-  });
-}
-
-export function removeCardLike(id, token) {
-  return request(`${baseUrl}/items/${id}/likes`, {
-    method: "DELETE",
-    headers: {
-      authorization: `Bearer ${token}`,
+      "content-type": "application/json",
     },
   });
 }

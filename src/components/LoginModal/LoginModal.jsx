@@ -1,66 +1,73 @@
-import React, { useState } from "react";
+import React from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
+// import "./LoginModal.css";
 
-const LoginModal = ({ handleCloseModal, isOpen = true, handleLogin }) => {
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
-  });
+function LoginModal({
+  activeModal,
+  onClose,
+  isOpen,
+  handleLogin,
+  buttonText,
+  openRegisterModal,
+}) {
+  const { values, handleChange, errors } = useFormWithValidation();
 
-  // Change function
-  const handleChange = (evt) => {
-    const { name, value } = evt.target;
-    setLoginData({ ...loginData, [name]: value });
-  };
-
-  // Submit function
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    if (!loginData.email || !loginData.password) {
-      return;
-    }
-    handleLogin(loginData);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleLogin(values.email, values.password);
   };
 
   return (
     <ModalWithForm
       title="Log In"
-      buttonText="LogIn"
-      linkText="or Sign Up"
-      linkHref="/signup"
-      onClose={handleCloseModal}
+      name="login"
+      activeModal={activeModal}
       isOpen={isOpen}
+      onClose={onClose}
       onSubmit={handleSubmit}
+      buttonText={buttonText}
     >
-      <div className="form__input">
-        <label>
-          Email
-          <input
-            type="email"
-            name="email"
-            value={loginData.email}
-            onChange={handleChange}
-            className="form__text-input"
-            placeholder="Email"
-          />
-        </label>
-      </div>
-      <div className="form__input">
-        <label>
-          Password
-          <input
-            type="password"
-            name="password"
-            minLength="8"
-            value={loginData.password}
-            onChange={handleChange}
-            className="form__text-input"
-            placeholder="Password"
-          />
-        </label>
-      </div>
+      <label className="modal__label">
+        Email *{" "}
+        <input
+          type="text"
+          className="modal__input"
+          name="email"
+          placeholder="Email"
+          minLength={2}
+          value={values.email}
+          onChange={handleChange}
+          autoComplete="email"
+          required
+        />
+        {errors.email && <span className="modal__error">{errors.email}</span>}
+      </label>
+      <label className="modal__label">
+        Password *{" "}
+        <input
+          type="password"
+          className="modal__input"
+          name="password"
+          placeholder="Password"
+          autoComplete="current-password"
+          value={values.password}
+          onChange={handleChange}
+          required
+        />
+        {errors.password && (
+          <span className="modal__error">{errors.password}</span>
+        )}
+      </label>
+      <button
+        type="button"
+        className="modal__btn-register"
+        onClick={openRegisterModal}
+      >
+        or Sign Up
+      </button>
     </ModalWithForm>
   );
-};
+}
 
 export default LoginModal;

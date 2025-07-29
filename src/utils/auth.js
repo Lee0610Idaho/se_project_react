@@ -1,45 +1,55 @@
-import { request } from "./api";
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL, request } from "./constants";
 
-export const signUp = ({ name, email, password, avatar }) => {
+export function register(email, password, name, avatar) {
   return request(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name, email, password, avatar }),
+    body: JSON.stringify({
+      name,
+      avatar,
+      email,
+      password,
+    }),
   });
-};
+}
 
-export const signIn = ({ email, password }) => {
+export function login(email, password) {
+  console.log(">>login", email);
   return request(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({
+      email,
+      password,
+    }),
   });
-};
+}
 
-export const checkUserToken = (token) => {
+export function getCurrentUser(token) {
   return request(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
-      Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      authorization: `Bearer ${token}`,
     },
   });
-};
+}
 
-export const editUserProfile = (newData, token) => {
+export function editProfileData(name, avatar, token) {
   return request(`${BASE_URL}/users/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(newData),
+    body: JSON.stringify({
+      name,
+      avatar,
+    }),
   });
-};
+}
