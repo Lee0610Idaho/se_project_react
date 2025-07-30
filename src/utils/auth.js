@@ -17,20 +17,20 @@ export function register(email, password, name, avatar) {
 }
 
 export function login(email, password) {
-  console.log(">>login", email);
-  return request(`${BASE_URL}/signin`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email,
-      password,
-    }),
-  });
+  console.log("Logging in");
+  // return request(`${BASE_URL}/signin`, {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   Body: JSON.stringify({
+  //     email,
+  //     password,
+  //   }),
+  // });
 }
 
-export function getCurrentUser(token) {
+export function checkToken(token) {
   return request(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {

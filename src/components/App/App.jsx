@@ -14,10 +14,16 @@ import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit
 import AddItemModal from "../AddItemModal/AddItemModal";
 import { defaultClothingItems } from "../../utils/constants";
 import { Route, Routes } from "react-router-dom";
-import { addItems, getItems, deleteItems } from "../../utils/api";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
-import * as auth from "../../utils/auth.js";
+import { addItems, getItems, deleteItems } from "../../utils/api";
+import {
+  checkToken,
+  login,
+  register,
+  editProfileData,
+} from "../../utils/auth.js";
+import * as api from "../../utils/api.js";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -95,14 +101,14 @@ function App() {
       );
   };
 
-  const handleRegistration = (name, avatar, email, password) => {
-    console.log("Registering");
-    // register(name, avatar, email, password)
-    //   .then(() => {
-    //     handleLogin(email, password);
-    //     handleCloseModal();
-    //   })
-    //   .catch(console.error);
+  const handleRegistration = (email, password, name, avatar) => {
+    console.log(email, password, name);
+    register(email, password, name, avatar)
+      .then(() => {
+        //handleLogin(email, password);
+        handleCloseModal();
+      })
+      .catch(console.error);
   };
 
   const handleLogin = (email, password) => {
@@ -112,22 +118,22 @@ function App() {
     // }
 
     // login(email, password)
-    //   .then((data) => {
-    //     if (data.token && data.user) {
-    //       setToken(data.token);
-    //       setIsLoggedIn(true);
-    //       console.log(data.user);
-    //       setUserData(data.user);
-    //       setIsLoggedInLoading(false);
-    //     } else {
-    //       console.error("No JWT token found.");
-    //     }
-    //     handleCloseModal();
-    //   })
-    //   .catch((err) => {
-    //     console.err("Error logging user in:", err);
-    //   })
-    //   .finally(setIsLoggedInLoading(false));
+    // .then((data) => {
+    //   if (data.token && data.user) {
+    //     setToken(data.token);
+    //     setIsLoggedIn(true);
+    //     console.log(data.user);
+    //     setUserData(data.user);
+    //     setIsLoggedInLoading(false);
+    //   } else {
+    //     console.error("No JWT token found.");
+    //   }
+    //   handleCloseModal();
+    // })
+    // .catch((err) => {
+    //   console.err("Error logging user in:", err);
+    // })
+    // .finally(setIsLoggedInLoading(false));
   };
 
   useEffect(() => {

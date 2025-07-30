@@ -103,9 +103,13 @@ export const weatherOptions = [
 
 export const APIkey = "af36a5493bf4708a24e2168aa7f08d38";
 
-const BASE_URL = "http://localhost:3001";
+export const BASE_URL = "http://localhost:3001";
 
-export { BASE_URL };
+export function checkResponse(res) {
+  if (res.ok) {
+    return res.json();
+  } else return Promise.reject(`Error: ${res.status}`);
+}
 
 export function request(url, options) {
   return fetch(url, options).then(checkResponse);
