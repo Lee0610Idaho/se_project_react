@@ -18,12 +18,13 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import { addItems, getItems, deleteItems } from "../../utils/api";
 import {
-  checkToken,
+  getCurrentUser,
   login,
   register,
   editProfileData,
 } from "../../utils/auth.js";
 import * as api from "../../utils/api.js";
+import { jsx } from "react/jsx-runtime";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -39,6 +40,8 @@ function App() {
   const [temp, setTemp] = useState(0);
   const [currentCity, setCurrentCity] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedInLoading, setIsLoggedInLoading] = useState(true);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -70,6 +73,45 @@ function App() {
     e.preventDefault();
     setActiveModal("login");
   };
+
+  const [currentUser, setUserData] = useState({
+    name: "",
+    email: "",
+    avatar: "",
+    _id: "",
+  });
+
+  const JWT_SECRET = "jwt";
+  // with localStorage the key TOKEN_KEY.
+  const setToken = (token) => localStorage.setItem(JWT_SECRET, token);
+  // getToken retrieves and returns the value associated with TOKEN_KEY from localStorage.
+  const getToken = () => {
+    return localStorage.getItem(JWT_SECRET);
+  };
+
+  const removeToken = () => {
+    return localStorage.removeItem(JWT_SECRET);
+  };
+
+  useEffect(() => {
+    const jwt = getToken();
+    if (!jwt) {
+      console.error("No token found in local storage");
+      return;
+    }
+
+    getCurrentUser(jwt)
+      .then((data) => {
+        setIsLoggedInLoading(false);
+        setIsLoggedIn(true);
+        setUserData(data);
+      })
+      .catch((error) => {
+        console.error("Invalid token:", error);
+        removeToken();
+        setIsLoggedInLoading(false);
+      });
+  }, []);
 
   const handleAddItemSubmit = (item) => {
     console.log(item);
@@ -113,27 +155,24 @@ function App() {
 
   const handleLogin = (email, password) => {
     console.log("Logging in");
-    // if (!email || !password) {
-    //   return;
-    // }
-
-    // login(email, password)
-    // .then((data) => {
-    //   if (data.token && data.user) {
-    //     setToken(data.token);
-    //     setIsLoggedIn(true);
-    //     console.log(data.user);
-    //     setUserData(data.user);
-    //     setIsLoggedInLoading(false);
-    //   } else {
-    //     console.error("No JWT token found.");
-    //   }
-    //   handleCloseModal();
-    // })
-    // .catch((err) => {
-    //   console.err("Error logging user in:", err);
-    // })
-    // .finally(setIsLoggedInLoading(false));
+    if (!email || !password) {
+      console.log("incorrect info");
+      return;
+    }
+    console.log("Correct email and password");
+    login(email, password)
+      .then((data) => {
+        if (data.token && data.user) {
+          setToken(data.token);
+          setIsLoggedIn(true);
+          setUserData(data.user);
+          setIsLoggedInLoading(false);
+        } else {
+          console.error("No JWT token found.");
+        }
+        handleCloseModal();
+      })
+      .catch(console.error);
   };
 
   useEffect(() => {
