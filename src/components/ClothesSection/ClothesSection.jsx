@@ -1,8 +1,16 @@
 import "./ClothesSection.css";
 import SideBar from "../SideBar/SideBar";
 import ItemCard from "../ItemCard/ItemCard";
+import React from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function ClothesSection({ onSelectedCard, onCreateModal, clothingItems }) {
+  const currentUser = React.useContext(CurrentUserContext);
+
+  const clothingItemsByOwner = clothingItems.filter(
+    (item) => item.owner === currentUser._id
+  );
+
   return (
     <div className="clothes-section">
       <div className="clothes-section__text">
@@ -17,7 +25,7 @@ function ClothesSection({ onSelectedCard, onCreateModal, clothingItems }) {
       </div>
 
       <ul className="clothes-section__list">
-        {clothingItems.map((item) => {
+        {clothingItemsByOwner.map((item) => {
           return (
             <ItemCard
               key={item._id}
