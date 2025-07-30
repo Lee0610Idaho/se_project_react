@@ -17,6 +17,7 @@ import { defaultClothingItems } from "../../utils/constants";
 import { Route, Routes } from "react-router-dom";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
+import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
 import { addItems, getItems, deleteItems } from "../../utils/api";
 import {
   getCurrentUser,
@@ -114,23 +115,6 @@ function App() {
       });
   }, []);
 
-  // const handleAddItemSubmit = (item) => {
-  //   console.log(item);
-  //   addItems(item)
-  //     .then((newItem) => {
-  //       setClothingItems((prevItems) => [newItem, ...prevItems]);
-  //     })
-  //     .then(() => {
-  //       handleCloseModal();
-  //     })
-  //     .catch((error) => {
-  //       console.error(`Failed to add item due to: ${error.status}`);
-  //     })
-  //     .finally(() => {
-  //       console.log("added item");
-  //     });
-  // };
-
   const handleAddItemSubmit = (item) => {
     console.log(item);
     const token = getToken();
@@ -218,6 +202,29 @@ function App() {
       .catch(console.error);
   };
 
+  const handleEditProfile = (name, avatar) => {
+    const token = getToken();
+
+    if (!currentUser) {
+      console.error("User not authorized to modify profile");
+      return;
+    }
+
+    setIsLoading(true);
+    editProfileData(name, avatar, token)
+      .then((userData) => {
+        const user = userData.user;
+        setUserData({
+          _id: currentUser._id,
+          email: currentUser.email,
+          name: user.name,
+          avatar: user.avatar,
+        });
+        handleCloseModal();
+      })
+      .catch((err) => console.error("Error updating profile:", err));
+  };
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -303,6 +310,13 @@ function App() {
             handleLogin={handleLogin}
             buttonText={isLoading ? "Saving..." : "Log In"}
             openRegisterModal={openRegisterModal}
+          />
+          <EditProfileModal
+            activeModal={activeModal}
+            onClose={handleCloseModal}
+            isOpen={activeModal === "edit"}
+            handleEdit={handleEditProfile}
+            buttonText={isLoading ? "Saving..." : "Save changes"}
           />
         </div>
       </CurrentTemperatureUnitContext.Provider>
