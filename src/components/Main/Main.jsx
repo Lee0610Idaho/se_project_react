@@ -46,7 +46,8 @@ function Main({ weatherTemp, onSelectedCard, clothingItems }) {
         <ul className="cards__list">
           {clothingItems
             .filter((item) => {
-              return item.weather.toLowerCase() === weatherType;
+              console.log(item);
+              return item.weather === weatherType;
             })
             .map((item) => {
               return (

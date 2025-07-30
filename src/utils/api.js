@@ -12,11 +12,12 @@ function request(url, options) {
 }
 
 // Add item
-export function addItems(item) {
+export function addItems(item, token) {
   return request(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
+      authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(item),
   });
