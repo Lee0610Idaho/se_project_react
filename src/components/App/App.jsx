@@ -62,6 +62,10 @@ function App() {
     setActiveModal("create");
   };
 
+  const openEditProfileModal = () => {
+    setActiveModal("edit");
+  };
+
   const handleCloseModal = () => {
     setActiveModal("");
   };
@@ -213,16 +217,26 @@ function App() {
     setIsLoading(true);
     editProfileData(name, avatar, token)
       .then((userData) => {
-        const user = userData.user;
         setUserData({
           _id: currentUser._id,
           email: currentUser.email,
-          name: user.name,
-          avatar: user.avatar,
+          name: userData.name,
+          avatar: userData.avatar,
         });
         handleCloseModal();
       })
       .catch((err) => console.error("Error updating profile:", err));
+  };
+
+  const handleLogOut = () => {
+    if (isLoggedIn) {
+      removeToken();
+      setIsLoggedIn(false);
+      setUserData({});
+      handleCloseModal();
+    } else {
+      console.err("Cannot be logged out");
+    }
   };
 
   useEffect(() => {
@@ -274,6 +288,8 @@ function App() {
                     onSelectedCard={handleSelectedCard}
                     onCreateModal={handleCreateModal}
                     clothingItems={clothingItems}
+                    openEditProfileModal={openEditProfileModal}
+                    handleLogout={handleLogOut}
                   />
                 }
               />
@@ -315,7 +331,7 @@ function App() {
             activeModal={activeModal}
             onClose={handleCloseModal}
             isOpen={activeModal === "edit"}
-            handleEdit={handleEditProfile}
+            handleEditProfile={handleEditProfile}
             buttonText={isLoading ? "Saving..." : "Save changes"}
           />
         </div>

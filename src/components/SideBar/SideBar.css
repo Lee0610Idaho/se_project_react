@@ -1,5 +1,4 @@
 .sidebar {
-  display: flex;
   align-items: center;
   padding-top: 18px;
   padding-right: 116px;
@@ -8,9 +7,49 @@
   max-height: 56px;
 }
 
+.sidebar__profile {
+  display: flex;
+  gap: 20px;
+}
+
 .sidebar__username {
   width: 157px;
   height: 28px;
   line-height: 24.8px;
   margin: 0;
+}
+
+.sidebar__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+}
+
+.sidebar__placeholder {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+}
+
+.sidebar_buttons {
+  padding-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar__edit {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: fit-content;
+  padding: 0;
+}
+
+.sidebar__logout {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: fit-content;
+  padding: 0;
 }

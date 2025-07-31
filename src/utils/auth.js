@@ -45,6 +45,8 @@ export function getCurrentUser(token) {
 }
 
 export function editProfileData(name, avatar, token) {
+  console.log(name);
+  console.log(avatar);
   return request(`${BASE_URL}/users/me`, {
     method: "PATCH",
     headers: {
