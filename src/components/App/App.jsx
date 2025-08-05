@@ -250,8 +250,21 @@ function App() {
     }
   };
 
-  // .then((newItem) => {
-  // setClothingItems((prevItems) => [newItem.data, ...prevItems]);
+  useEffect(() => {
+    if (!activeModal) return;
+
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        handleCloseModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
 
   const handleCardLike = ({ id, isLiked }) => {
     const token = getToken();
