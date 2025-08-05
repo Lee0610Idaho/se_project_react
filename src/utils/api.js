@@ -42,3 +42,21 @@ export function deleteItems(_id) {
     },
   });
 }
+
+export function addCardLike(id, token) {
+  return request(`${baseUrl}/items/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
+}
+
+export function removeCardLike(id, token) {
+  return request(`${baseUrl}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
+}

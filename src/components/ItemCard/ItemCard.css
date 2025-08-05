@@ -34,3 +34,15 @@
   border-radius: 20px;
   height: auto;
 }
+
+.card__like-hidden {
+  display: none;
+}
+
+.card__like-visible {
+  display: block;
+}
+
+.card__like-visible:hover {
+  opacity: 30%;
+}

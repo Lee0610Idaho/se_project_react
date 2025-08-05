@@ -18,7 +18,13 @@ import { Route, Routes } from "react-router-dom";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
-import { addItems, getItems, deleteItems } from "../../utils/api";
+import {
+  addItems,
+  getItems,
+  deleteItems,
+  addCardLike,
+  removeCardLike,
+} from "../../utils/api";
 import {
   getCurrentUser,
   login,
@@ -239,6 +245,44 @@ function App() {
     }
   };
 
+  // .then((newItem) => {
+  // setClothingItems((prevItems) => [newItem.data, ...prevItems]);
+
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = getToken();
+
+    !isLiked
+      ? // if so, send a request to add the user's id to the card's likes array
+
+        // the first argument is the card's id
+        addCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+            getItems()
+              .then((data) => {
+                setClothingItems(data);
+              })
+              .catch(console.error);
+          })
+          .catch((err) => console.log(err))
+      : // if not, send a request to remove the user's id from the card's likes array
+        // the first argument is the card's id
+        removeCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((card) => (card._id === id ? updatedCard : card))
+            );
+            getItems()
+              .then((data) => {
+                setClothingItems(data);
+              })
+              .catch(console.error);
+          })
+          .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -278,6 +322,7 @@ function App() {
                     weatherTemp={temp}
                     onSelectedCard={handleSelectedCard}
                     clothingItems={clothingItems}
+                    onCardLike={handleCardLike}
                   />
                 }
               />

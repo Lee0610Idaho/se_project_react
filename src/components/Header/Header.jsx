@@ -9,8 +9,6 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Header({ onCreateModal, city, openRegisterModal, openLoginModal }) {
   const currentUser = React.useContext(CurrentUserContext);
-  console.log(currentUser);
-  console.log(currentUser.name);
 
   const isLoggedIn = currentUser && currentUser.name;
 
