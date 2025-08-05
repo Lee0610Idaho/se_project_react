@@ -33,12 +33,12 @@ export function getItems() {
   });
 }
 
-// Delete item
-export function deleteItems(_id) {
+export function deleteItem(_id, token) {
   return request(`${baseUrl}/items/${_id}`, {
     method: "DELETE",
     headers: {
-      "content-type": "application/json",
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
   });
 }

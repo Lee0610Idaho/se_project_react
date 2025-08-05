@@ -21,7 +21,7 @@ import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
 import {
   addItems,
   getItems,
-  deleteItems,
+  deleteItem,
   addCardLike,
   removeCardLike,
 } from "../../utils/api";
@@ -149,18 +149,23 @@ function App() {
       });
   };
 
-  const handleDeleteItem = (_id) => {
-    deleteItems(_id)
+  function handleDeleteItem(id) {
+    const token = getToken();
+    if (!token) {
+      console.error("Not authorized");
+      return;
+    }
+
+    deleteItem(id, token)
       .then(() => {
-        setClothingItems((clothingItems) =>
-          clothingItems.filter((clothingItem) => clothingItem._id !== _id)
+        const updatedClothingItems = clothingItems.filter(
+          (item) => item._id !== id
         );
+        setClothingItems(updatedClothingItems);
         handleCloseModal();
       })
-      .catch((error) =>
-        console.error(`Unable to delete item due to: ${error.status}`)
-      );
-  };
+      .catch(console.error);
+  }
 
   const handleRegistration = (email, password, name, avatar) => {
     console.log(email, password, name);
