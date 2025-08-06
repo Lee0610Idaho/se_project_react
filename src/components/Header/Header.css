@@ -59,3 +59,26 @@
   height: 40px;
   border-radius: 50%;
 }
+
+.header__guest-nav {
+  padding-left: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.header__signin {
+  padding-left: 20px;
+  color: #000000;
+  border: none;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: bold;
+}
+
+.header__signup {
+  color: #000000;
+  border: none;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: bold;
+}

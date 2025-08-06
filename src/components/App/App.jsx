@@ -19,6 +19,7 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
 import ModalWithConfirm from "../ModalWithConfirm/ModalWithConfirm.jsx";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
 
 import {
   addItems,
@@ -212,7 +213,7 @@ function App() {
         if (data.token) {
           setToken(data.token);
           setIsLoggedIn(true);
-          // setUserData(data.user);
+          setUserData(data.user);
           getUserData(data.token);
           // setIsLoggedInLoading(false);
         } else {
@@ -246,11 +247,17 @@ function App() {
   };
 
   const handleLogOut = () => {
+    if (!isLoggedIn) {
+      console.log("clicking log out");
+      console.log(isLoggedIn);
+    }
+
     if (isLoggedIn) {
       removeToken();
       setIsLoggedIn(false);
       setUserData({});
       handleCloseModal();
+      console.log("user logged out");
     } else {
       console.err("Cannot be logged out");
     }
@@ -350,16 +357,19 @@ function App() {
                   />
                 }
               />
+
               <Route
                 path="/profile"
                 element={
-                  <Profile
-                    onSelectedCard={handleSelectedCard}
-                    onCreateModal={handleCreateModal}
-                    clothingItems={clothingItems}
-                    openEditProfileModal={openEditProfileModal}
-                    handleLogout={handleLogOut}
-                  />
+                  <ProtectedRoute>
+                    <Profile
+                      onSelectedCard={handleSelectedCard}
+                      onCreateModal={handleCreateModal}
+                      clothingItems={clothingItems}
+                      openEditProfileModal={openEditProfileModal}
+                      handleLogOut={handleLogOut}
+                    />
+                  </ProtectedRoute>
                 }
               />
             </Routes>
