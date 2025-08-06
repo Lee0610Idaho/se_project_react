@@ -2,7 +2,7 @@ import "./ItemModal.css";
 import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function ItemModal({ activeModal, onClose, card, deleteItem }) {
+function ItemModal({ activeModal, onClose, card, onOpenDelete }) {
   const currentUser = useContext(CurrentUserContext);
 
   // Checking if the current user is the owner of the current clothing item
@@ -12,10 +12,6 @@ function ItemModal({ activeModal, onClose, card, deleteItem }) {
   const itemDeleteButtonClassName = `modal__delete-button modal__delete-button_visible ${
     isOwn ? "" : "modal__delete-button_hidden"
   }`;
-
-  const handleDeleteItem = () => {
-    deleteItem(card._id);
-  };
 
   return (
     <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
@@ -33,7 +29,7 @@ function ItemModal({ activeModal, onClose, card, deleteItem }) {
               <button
                 className={itemDeleteButtonClassName}
                 type="button"
-                onClick={handleDeleteItem}
+                onClick={onOpenDelete}
               >
                 Delete item
               </button>

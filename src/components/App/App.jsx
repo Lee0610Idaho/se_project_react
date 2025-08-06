@@ -18,6 +18,8 @@ import { Route, Routes } from "react-router-dom";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
+import ModalWithConfirm from "../ModalWithConfirm/ModalWithConfirm.jsx";
+
 import {
   addItems,
   getItems,
@@ -70,6 +72,10 @@ function App() {
 
   const openEditProfileModal = () => {
     setActiveModal("edit");
+  };
+
+  const handleOpenDelete = () => {
+    setActiveModal("confirm");
   };
 
   const handleCloseModal = () => {
@@ -149,17 +155,17 @@ function App() {
       });
   };
 
-  function handleDeleteItem(id) {
+  function handleDeleteItem() {
     const token = getToken();
     if (!token) {
       console.error("Not authorized");
       return;
     }
 
-    deleteItem(id, token)
+    deleteItem(selectedCard._id, token)
       .then(() => {
         const updatedClothingItems = clothingItems.filter(
-          (item) => item._id !== id
+          (item) => item._id !== selectedCard._id
         );
         setClothingItems(updatedClothingItems);
         handleCloseModal();
@@ -371,7 +377,15 @@ function App() {
             card={selectedCard}
             onClose={handleCloseModal}
             isOpen={activeModal === "preview"}
-            deleteItem={handleDeleteItem}
+            onOpenDelete={handleOpenDelete}
+          />
+          <ModalWithConfirm
+            name="delete"
+            isOpen={activeModal === "delete"}
+            activeModal={activeModal}
+            onDeleteItem={handleDeleteItem}
+            onClose={handleCloseModal}
+            buttonText={isLoading ? "Saving..." : "Yes, delete item"}
           />
 
           <RegisterModal
