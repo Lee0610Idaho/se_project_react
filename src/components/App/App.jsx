@@ -131,7 +131,7 @@ function App() {
   const handleAddItemSubmit = (item) => {
     const token = getToken();
     if (!token) {
-      console.err("User not authorized");
+      console.error("User not authorized");
       return;
     }
 
@@ -248,7 +248,7 @@ function App() {
       handleCloseModal();
       console.log("user logged out");
     } else {
-      console.err("Cannot be logged out");
+      console.error("Cannot be logged out");
     }
   };
 
@@ -394,7 +394,7 @@ function App() {
             isOpen={activeModal === "register"}
             handleRegistration={handleRegistration}
             buttonText={"Sign Up"}
-            openSignInModal={openLoginModal}
+            openLoginModal={openLoginModal}
           />
           <LoginModal
             activeModal={activeModal}

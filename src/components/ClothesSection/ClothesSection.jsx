@@ -22,7 +22,7 @@ function ClothesSection({
         <p className="clothes-section__header">Your items</p>
         <button
           className="clothes-section__card-button"
-          type="text"
+          type="button"
           onClick={onCreateModal}
         >
           + Add New

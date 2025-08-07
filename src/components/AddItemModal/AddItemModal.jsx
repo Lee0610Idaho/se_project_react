@@ -23,10 +23,6 @@ export default function AddItemModal({
     setWeather(e.target.value);
   };
 
-  const resetForm = () => {
-    console.log("resetting form");
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddItemModalSubmit({ name, imageUrl, weather });

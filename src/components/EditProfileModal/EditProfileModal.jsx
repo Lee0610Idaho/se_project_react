@@ -45,7 +45,7 @@ function EditProfileModal({
         <input
           type="text"
           className="modal__input"
-          id="name"
+          id="profileName"
           name="name"
           placeholder="Name"
           minLength="2"
