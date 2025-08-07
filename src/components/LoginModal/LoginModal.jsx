@@ -1,7 +1,7 @@
 import React from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
-// import "./LoginModal.css";
+import "./LoginModal.css";
 
 function LoginModal({
   activeModal,
@@ -29,7 +29,7 @@ function LoginModal({
       buttonText={buttonText}
     >
       <label className="modal__label">
-        Email *{" "}
+        Email{" "}
         <input
           type="text"
           className="modal__input"
@@ -44,7 +44,7 @@ function LoginModal({
         {errors.email && <span className="modal__error">{errors.email}</span>}
       </label>
       <label className="modal__label">
-        Password *{" "}
+        Password{" "}
         <input
           type="password"
           className="modal__input"

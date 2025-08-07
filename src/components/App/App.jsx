@@ -50,9 +50,7 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [temp, setTemp] = useState(0);
   const [currentCity, setCurrentCity] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLoggedInLoading, setIsLoggedInLoading] = useState(true);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -100,10 +98,10 @@ function App() {
     _id: "",
   });
 
+  //Token Log in
   const JWT_SECRET = "jwt";
-  // with localStorage the key TOKEN_KEY.
   const setToken = (token) => localStorage.setItem(JWT_SECRET, token);
-  // getToken retrieves and returns the value associated with TOKEN_KEY from localStorage.
+
   const getToken = () => {
     return localStorage.getItem(JWT_SECRET);
   };
@@ -121,25 +119,21 @@ function App() {
 
     getCurrentUser(jwt)
       .then((data) => {
-        setIsLoggedInLoading(false);
         setIsLoggedIn(true);
         setUserData(data);
       })
       .catch((error) => {
         console.error("Invalid token:", error);
         removeToken();
-        setIsLoggedInLoading(false);
       });
   }, []);
 
   const handleAddItemSubmit = (item) => {
-    console.log(item);
     const token = getToken();
     if (!token) {
       console.err("User not authorized");
       return;
     }
-    setIsLoading(true);
 
     addItems(item, token)
       .then((newItem) => {
@@ -178,25 +172,22 @@ function App() {
     console.log(email, password, name);
     register(email, password, name, avatar)
       .then(() => {
-        //handleLogin(email, password);
+        handleLogin(email, password);
         handleCloseModal();
       })
       .catch(console.error);
   };
 
+  //Get User Data from API and apply to current user
   function getUserData(token) {
-    // use the token from the local storage
     getCurrentUser(token)
-      // fetch the data from the api
       .then((userData) => {
-        // set the currentUser in this function, not on the login function
         setUserData({
           _id: userData._id,
           email: userData.email,
           name: userData.name,
           avatar: userData.avatar,
         });
-        console.log(userData);
       })
       .catch((error) => {
         console.error(error);
@@ -205,7 +196,6 @@ function App() {
 
   const handleLogin = (email, password) => {
     if (!email || !password) {
-      console.log("incorrect info");
       return;
     }
     login(email, password)
@@ -213,15 +203,15 @@ function App() {
         if (data.token) {
           setToken(data.token);
           setIsLoggedIn(true);
-          setUserData(data.user);
           getUserData(data.token);
-          // setIsLoggedInLoading(false);
         } else {
           console.error("No JWT token found.");
         }
         handleCloseModal();
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error("Error logging user in:", err);
+      });
   };
 
   const handleEditProfile = (name, avatar) => {
@@ -232,7 +222,6 @@ function App() {
       return;
     }
 
-    setIsLoading(true);
     editProfileData(name, avatar, token)
       .then((userData) => {
         setUserData({
@@ -361,7 +350,7 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
                     <Profile
                       onSelectedCard={handleSelectedCard}
                       onCreateModal={handleCreateModal}
@@ -395,7 +384,7 @@ function App() {
             activeModal={activeModal}
             onDeleteItem={handleDeleteItem}
             onClose={handleCloseModal}
-            buttonText={isLoading ? "Saving..." : "Yes, delete item"}
+            buttonText={"Yes, delete item"}
           />
 
           <RegisterModal
@@ -403,7 +392,7 @@ function App() {
             onClose={handleCloseModal}
             isOpen={activeModal === "register"}
             handleRegistration={handleRegistration}
-            buttonText={isLoading ? "Saving..." : "Sign Up"}
+            buttonText={"Sign Up"}
             openSignInModal={openLoginModal}
           />
           <LoginModal
@@ -411,7 +400,7 @@ function App() {
             onClose={handleCloseModal}
             isOpen={activeModal === "login"}
             handleLogin={handleLogin}
-            buttonText={isLoading ? "Saving..." : "Log In"}
+            buttonText={"Log In"}
             openRegisterModal={openRegisterModal}
           />
           <EditProfileModal
@@ -419,7 +408,7 @@ function App() {
             onClose={handleCloseModal}
             isOpen={activeModal === "edit"}
             handleEditProfile={handleEditProfile}
-            buttonText={isLoading ? "Saving..." : "Save changes"}
+            buttonText={"Save changes"}
           />
         </div>
       </CurrentTemperatureUnitContext.Provider>

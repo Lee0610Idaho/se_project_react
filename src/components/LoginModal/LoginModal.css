@@ -1,0 +1,15 @@
+.modal__btn-register {
+  margin: 0;
+  background: #fff;
+
+  color: rgba(0, 0, 0, 0.5);
+
+  border: none;
+  gap: 8px;
+  width: fit-content;
+  position: absolute;
+  bottom: 41px;
+  left: 166px;
+  padding-top: 32px;
+  cursor: pointer;
+}

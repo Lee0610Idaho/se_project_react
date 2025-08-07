@@ -1,6 +1,6 @@
 import React from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-// import "./RegisterModal.css";
+import "./RegisterModal.css";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 
 function RegisterModal({

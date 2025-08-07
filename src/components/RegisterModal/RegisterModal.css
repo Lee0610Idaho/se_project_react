@@ -1,0 +1,13 @@
+.modal__btn-login {
+  margin: 16px 0 0;
+  background: #fff;
+  color: rgba(0, 0, 0, 0.5);
+  border: none;
+  padding: 0;
+  gap: 8px;
+  width: fit-content;
+  position: absolute;
+  bottom: 45px;
+  left: 170px;
+  cursor: pointer;
+}
