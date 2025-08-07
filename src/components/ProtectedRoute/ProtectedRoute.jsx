@@ -7,7 +7,7 @@ export default function ProtectedRoute({
   isLoggedInLoading,
 }) {
   const location = useLocation();
-  console.log(location);
+
   const from = location.state?.from || "/";
 
   //Proceed
