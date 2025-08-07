@@ -1,4 +1,5 @@
 import "./ModalWithForm.css";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation.js";
 
 function ModalWithForm({
   children,
@@ -9,6 +10,14 @@ function ModalWithForm({
   isOpen,
   onSubmit,
 }) {
+  function handleOverlayClick(e) {
+    if (e.target.classList.contains("modal_opened")) {
+      onClose();
+    }
+  }
+
+  const { isValid } = useFormWithValidation({});
+
   return (
     <div className={`modal ${isOpen && "modal_opened"}`}>
       <div className="modal__content">
@@ -20,7 +29,7 @@ function ModalWithForm({
         ></button>
         <form onSubmit={onSubmit} action="" className="modal__form">
           {children}
-          <button type="submit" className="modal__submit">
+          <button type="submit" className="modal__submit" disabled={isValid}>
             {buttonText}
           </button>
         </form>
