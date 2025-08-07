@@ -17,10 +17,6 @@ export function register(email, password, name, avatar) {
 }
 
 export function login(email, password) {
-  // console.log("in login functionn");
-  // console.log(email);
-  // console.log(password);
-  // console.log(JSON.stringify({ email, password }));
   return request(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {

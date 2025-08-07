@@ -4,7 +4,12 @@ import ItemCard from "../ItemCard/ItemCard";
 import React from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function ClothesSection({ onSelectedCard, onCreateModal, clothingItems }) {
+function ClothesSection({
+  onSelectedCard,
+  onCreateModal,
+  clothingItems,
+  onCardLike,
+}) {
   const currentUser = React.useContext(CurrentUserContext);
 
   const clothingItemsByOwner = clothingItems.filter(
@@ -31,6 +36,7 @@ function ClothesSection({ onSelectedCard, onCreateModal, clothingItems }) {
               key={item._id}
               item={item}
               onSelectedCard={onSelectedCard}
+              onCardLike={onCardLike}
             />
           );
         })}

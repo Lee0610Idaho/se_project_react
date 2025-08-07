@@ -10,12 +10,13 @@ export default function ProtectedRoute({
   console.log(location);
   const from = location.state?.from || "/";
 
+  //Proceed
   if (anonymous && isLoggedIn) {
-    console.log("correct user");
     return <Navigate to={from} />;
   }
+
+  //Send Back to Main
   if (!anonymous && !isLoggedIn) {
-    console.log("incorrect user");
     return <Navigate to="/" state={{ from: location }} />;
   }
   return children;

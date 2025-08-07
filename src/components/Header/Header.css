@@ -21,7 +21,7 @@
 }
 .header__username {
   margin: 8px 0 7px 0;
-  width: 157px;
+  width: auto;
 }
 
 .header__date-and-location {
@@ -52,6 +52,8 @@
 .header__link {
   text-decoration: none;
   color: black;
+  display: flex;
+  gap: 7px;
 }
 
 .header__avatar {

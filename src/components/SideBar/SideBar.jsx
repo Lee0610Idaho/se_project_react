@@ -13,14 +13,6 @@ function SideBar({ openEditProfileModal, handleLogOut }) {
     return "?";
   };
 
-  //   return (
-  //     <div className="sidebar">
-  //       <img className="sidebar__avatar" src={avatar} alt="Default Avatar" />
-  //       <p className="sidebar__username">Terrence Tegegne</p>
-  //     </div>
-  //   );
-  // }
-
   return (
     <div className="sidebar">
       <div className="sidebar__profile">

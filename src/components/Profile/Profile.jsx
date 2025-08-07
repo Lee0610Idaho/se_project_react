@@ -8,6 +8,7 @@ function Profile({
   clothingItems,
   openEditProfileModal,
   handleLogOut,
+  onCardLike,
 }) {
   return (
     <div className="profile">
@@ -22,6 +23,7 @@ function Profile({
           onSelectedCard={onSelectedCard}
           clothingItems={clothingItems}
           onCreateModal={onCreateModal}
+          onCardLike={onCardLike}
         />
       </section>
     </div>
