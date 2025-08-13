@@ -19,6 +19,7 @@ export function useFormWithValidation() {
       [e.target.name]: e.target.validationMessage,
     }));
     setIsValid(e.target.closest("form").checkValidity());
+    console.log(isValid);
   }
 
   const resetForm = useCallback(

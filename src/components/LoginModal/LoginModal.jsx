@@ -11,7 +11,7 @@ function LoginModal({
   buttonText,
   openRegisterModal,
 }) {
-  const { values, handleChange, errors } = useFormWithValidation();
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,6 +27,7 @@ function LoginModal({
       onClose={onClose}
       onSubmit={handleSubmit}
       buttonText={buttonText}
+      isValid={isValid}
     >
       <label className="modal__label">
         Email{" "}

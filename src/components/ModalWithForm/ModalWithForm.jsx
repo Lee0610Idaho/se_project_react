@@ -10,6 +10,7 @@ function ModalWithForm({
   onClose,
   isOpen,
   onSubmit,
+  isValid,
 }) {
   function handleOverlayClick(e) {
     if (e.target.classList.contains("modal_opened")) {
@@ -17,7 +18,7 @@ function ModalWithForm({
     }
   }
 
-  const { isValid } = useFormWithValidation({});
+  // const { isValid } = useFormWithValidation({});
 
   return (
     <div className={`modal ${isOpen && "modal_opened"}`}>

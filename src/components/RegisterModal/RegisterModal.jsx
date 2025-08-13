@@ -11,7 +11,7 @@ function RegisterModal({
   buttonText,
   openLoginModal,
 }) {
-  const { values, handleChange, errors } = useFormWithValidation();
+  const { values, handleChange, errors, isValid } = useFormWithValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,6 +32,7 @@ function RegisterModal({
       onClose={onClose}
       onSubmit={handleSubmit}
       buttonText={buttonText}
+      isValid={isValid}
     >
       <label className="modal__label">
         Email *{" "}
@@ -44,6 +45,7 @@ function RegisterModal({
           onChange={handleChange}
           minLength="2"
           autoComplete="email"
+          required
         />
         {errors.email && <span className="modal__error">{errors.email}</span>}
       </label>
@@ -58,6 +60,7 @@ function RegisterModal({
           value={values.password}
           onChange={handleChange}
           autoComplete="current-password"
+          required
         />
         {errors.password && (
           <span className="modal__error">{errors.password}</span>
@@ -73,6 +76,7 @@ function RegisterModal({
           minLength="2"
           value={values.name}
           onChange={handleChange}
+          required
         />
         {errors.name && <span className="modal__error">{errors.name}</span>}
       </label>
@@ -85,6 +89,7 @@ function RegisterModal({
           placeholder="Avatar URL"
           value={values.avatarUrl}
           onChange={handleChange}
+          required
         />
         {errors.avatarUrl && (
           <span className="modal__error">{errors.avatarUrl}</span>

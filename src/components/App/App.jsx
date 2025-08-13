@@ -20,6 +20,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
 import ModalWithConfirm from "../ModalWithConfirm/ModalWithConfirm.jsx";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
+import { getToken, setToken, removeToken } from "../../utils/token.js";
 
 import {
   addItems,
@@ -34,7 +35,6 @@ import {
   register,
   editProfileData,
 } from "../../utils/auth.js";
-import * as api from "../../utils/api.js";
 import { jsx } from "react/jsx-runtime";
 
 function App() {
@@ -97,18 +97,6 @@ function App() {
     avatar: "",
     _id: "",
   });
-
-  //Token Log in
-  const JWT_SECRET = "jwt";
-  const setToken = (token) => localStorage.setItem(JWT_SECRET, token);
-
-  const getToken = () => {
-    return localStorage.getItem(JWT_SECRET);
-  };
-
-  const removeToken = () => {
-    return localStorage.removeItem(JWT_SECRET);
-  };
 
   useEffect(() => {
     const jwt = getToken();

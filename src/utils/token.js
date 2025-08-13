@@ -1,11 +1,11 @@
-const TOKEN_KEY = "jwt";
+  //Token Log in
+  const JWT_SECRET = "jwt";
+  export const setToken = (token) => localStorage.setItem(JWT_SECRET, token);
 
-export const setToken = (token) => localStorage.setItem(TOKEN_KEY, token);
+  export const getToken = () => {
+    return localStorage.getItem(JWT_SECRET);
+  };
 
-export const getToken = () => {
-  return localStorage.getItem(TOKEN_KEY);
-};
-
-export const removeToken = () => {
-  localStorage.removeItem(TOKEN_KEY);
-};
+  export const removeToken = () => {
+    return localStorage.removeItem(JWT_SECRET);
+  };

@@ -102,21 +102,6 @@
   max-width: 124px;
 }
 
-/* .modal__submit {
-  font-weight: 700;
-  line-height: 20px;
-  font-size: 16px;
-  background: black;
-  color: white;
-  border: none;
-  margin: 32px 16px;
-  padding: 12px auto;
-  width: 124px;
-  height: 36px;
-  border-radius: 4px;
-  cursor: pointer;
-} */
-
 .modal__submit:disabled {
   background: #0000004d;
   opacity: 0.5;

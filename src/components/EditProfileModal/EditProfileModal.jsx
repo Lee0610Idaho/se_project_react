@@ -12,7 +12,7 @@ function EditProfileModal({
 }) {
   const currentUser = useContext(CurrentUserContext);
 
-  const { values, setValues, resetForm, handleChange, errors } =
+  const { values, setValues, resetForm, handleChange, errors, isValid } =
     useFormWithValidation();
 
   useEffect(() => {
@@ -39,6 +39,7 @@ function EditProfileModal({
       onClose={onClose}
       onSubmit={handleSubmit}
       buttonText={buttonText}
+      isValid={isValid}
     >
       <label className="modal__label">
         Name *{" "}

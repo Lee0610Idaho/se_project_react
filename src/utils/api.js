@@ -47,6 +47,7 @@ export function addCardLike(id, token) {
   return request(`${baseUrl}/items/${id}/likes`, {
     method: "PUT",
     headers: {
+      "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
   });
@@ -56,6 +57,7 @@ export function removeCardLike(id, token) {
   return request(`${baseUrl}/items/${id}/likes`, {
     method: "DELETE",
     headers: {
+      "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
   });
