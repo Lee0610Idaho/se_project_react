@@ -44,58 +44,62 @@ export const coordinates = {
 
 export const weatherOptions = [
   {
-    url: "src/assets/day/sunny.svg",
+    url: new URL("../assets/day/sunny.svg", import.meta.url).href,
     day: true,
     type: "sunny",
   },
   {
-    url: "src/assets/day/cloudy.svg",
+    url: new URL("src/assets/day/cloudy.svg", import.meta.url).href,
     day: true,
     type: "cloudy",
   },
-  { url: "src/assets/day/fog.svg", day: true, type: "fog" },
   {
-    url: "src/assets/day/storm.svg",
+    url: new URL("../assets/day/fog.svg", import.meta.url).href,
+    day: true,
+    type: "fog",
+  },
+  {
+    url: new URL("../assets/day/storm.svg", import.meta.url).href,
     day: true,
     type: "storm",
   },
   {
-    url: "src/assets/day/snow.svg",
+    url: new URL("../assets/day/snow.svg", import.meta.url).href,
     day: true,
     type: "snow",
   },
   {
-    url: "src/assets/day/rain.svg",
+    url: new URL("../assets/day/rain.svg", import.meta.url).href,
     day: true,
     type: "rain",
   },
   {
-    url: "src/assets/night/sunny.svg",
+    url: new URL("../assets/day/sunny.svg", import.meta.url).href,
     day: false,
     type: "sunny",
   },
   {
-    url: "src/assets/night/cloudy.svg",
+    url: new URL("../assets/day/cloudy.svg", import.meta.url).href,
     day: false,
     type: "cloudy",
   },
   {
-    url: "src/assets/night/fog.svg",
+    url: new URL("../assets/day/fog.svg", import.meta.url).href,
     day: false,
     type: "fog",
   },
   {
-    url: "src/assets/night/storm.svg",
+    url: new URL("../assets/day/storm.svg", import.meta.url).href,
     day: false,
     type: "storm",
   },
   {
-    url: "src/assets/night/snow.svg",
+    url: new URL("../assets/day/snow.svg", import.meta.url).href,
     day: false,
     type: "snow",
   },
   {
-    url: "src/assets/night/rain.svg",
+    url: new URL("../assets/day/rain.svg", import.meta.url).href,
     day: false,
     type: "rain",
   },
@@ -103,7 +107,10 @@ export const weatherOptions = [
 
 export const APIkey = "af36a5493bf4708a24e2168aa7f08d38";
 
-export const BASE_URL = "http://localhost:3001";
+export const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwrtt.jumpingcrab.com"
+    : "http://localhost:3001";
 
 export function checkResponse(res) {
   if (res.ok) {

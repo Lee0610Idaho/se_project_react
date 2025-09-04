@@ -1,4 +1,7 @@
-const baseUrl = "http://localhost:3001";
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwrtt.jumpingcrab.com"
+    : "http://localhost:3001";
 
 export function processResponse(res) {
   if (res.ok) {
